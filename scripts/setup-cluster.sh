@@ -90,6 +90,7 @@ function create_cluster_and_deploy() {
 
     kubectl --context="$K8S_CTX" -n foobar-app apply -f k8s/manifests/deployment.yaml
     kubectl --context="$K8S_CTX" -n foobar-app apply -f k8s/manifests/service.yaml
+    kubectl --context="$K8S_CTX" -n foobar-app apply -f k8s/manifests/network-policy.yaml
 
     echo "[${region_upper}] Applying IngressRouteTCP..."
     sed "s/HostSNI(\`us.foobar.local\`)/HostSNI(\`${region}.foobar.local\`)/" \

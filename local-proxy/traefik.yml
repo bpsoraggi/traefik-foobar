@@ -3,17 +3,14 @@ entryPoints:
     address: ":9445"
   metrics:
     address: ":9100"
-  # web:
-  #   address: ":9100" # HTTP entrypoint for non-TLS traffic (optional)
 
 providers:
   file:
-    # filename: dynamic.yml
     directory: "./dynamic"
     watch: true
 
 log:
-  level: DEBUG
+  level: INFO
 
 api:
   dashboard: true

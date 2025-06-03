@@ -3,8 +3,7 @@ tcp:
     foobar-tls:
       entryPoints:
         - https
-      # rule: "HostSNI(`api.foobar.local`)"
-      rule: "HostSNI(`*`)"
+      rule: "HostSNI(`api.foobar.local`)"
       service: foobar-service
       tls:
         passthrough: true

@@ -41,10 +41,6 @@ ports:
     targetPort: 8082
     nodePort: 31882
 
-# ingressRoute:
-#   dashboard:
-#     enabled: false
-
 providers:
   kubernetesCRD:
     enabled: true

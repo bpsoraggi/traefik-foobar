@@ -67,7 +67,7 @@ A demonstration of deploying the [foobar-api](https://github.com/containous/foob
      curl -vk \
        --resolve api.foobar.local:9445:127.0.0.1 \
        https://api.foobar.local:9445/health
-     # Repeat to observe round-robin between US and EU certificates
+     # Repeat to observe round-robin between US and EU
      ```
 
 ---
@@ -81,10 +81,10 @@ A demonstration of deploying the [foobar-api](https://github.com/containous/foob
 
 ## SOC 2 & Security Highlights
 
-- **Non-Root Containers**: Both Traefik and foobar-api run as non-root users (UID 65532 and UID 1000, respectively).
-- **Network Isolation**: A `NetworkPolicy` in `foobar-app` allows only Traefik pods (namespace labeled `app.kubernetes.io/name=traefik`) to reach the application pods.
-- **Least Privilege**: `foobar-sa` ServiceAccount has no extra RBAC roles.
-- **Encryption In Transit**: All ingress is TLS (self-signed for demo). Certificates live on a PVC (hostPath in kind), then imported into a Kubernetes TLS Secret.
+- **Non-Root Containers**: Both Traefik and foobar-api run as non-root users (UID 65532 and UID 1000, respectively)
+- **Network Isolation**: A `NetworkPolicy` in `foobar-app` allows only pods running in the Traefik namespace to reach the application pods
+- **Least Privilege**: `foobar-sa` ServiceAccount has no extra RBAC roles
+- **Encryption In Transit**: All ingress is TLS (self-signed for demo). Certificates live on a PVC (hostPath in kind), then imported into a Kubernetes TLS Secret
 
 ---
 

@@ -1,0 +1,68 @@
+deployment:
+  replicas: 2
+  podAnnotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "8082"
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 65532
+    fsGroup: 65532
+
+service:
+  type: NodePort
+
+entryPoints:
+  web:
+    address: ":80"
+    tls:
+      passthrough: true
+    redirections:
+      entryPoint:
+        to: websecure
+        scheme: https
+        permanent: true
+  websecure:
+    address: ":443"
+  metrics:
+    address: ":8082"
+
+ports:
+  web:
+    nodePort: 30080
+    redirections:
+      entryPoint:
+        to: websecure
+        scheme: https
+        permanent: true
+  websecure:
+    nodePort: 30443
+  metrics:
+    port: 8082
+    targetPort: 8082
+    nodePort: 31882
+
+# ingressRoute:
+#   dashboard:
+#     enabled: false
+
+providers:
+  kubernetesCRD:
+    enabled: true
+  kubernetesIngress:
+    enabled: false
+
+logs:
+  general:
+    level: INFO
+
+metrics:
+  prometheus:
+    enabled: true
+    entryPoint: metrics
+    port: 8082
+
+additionalArguments:
+  - "--providers.kubernetescrd.namespaces=foobar-app"
+
+rbac:
+  enabled: true

@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: foobar-deployment
+  namespace: foobar-app
+  labels:
+    app: foobar-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: foobar-api
+  template:
+    metadata:
+      labels:
+        app: foobar-api
+    spec:
+      serviceAccountName: foobar-sa
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      volumes:
+        - name: cert-volume
+          persistentVolumeClaim:
+            claimName: cert-pvc
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - name: foobar-container
+          image: foobar-api:latest
+          imagePullPolicy: IfNotPresent
+          args:
+            - "-port=80"
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: cert-volume
+              mountPath: /cert
+              readOnly: true
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 80
+              scheme: HTTPS
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 80
+              scheme: HTTPS
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+            requests:
+              cpu: "250m"
+              memory: "128Mi"

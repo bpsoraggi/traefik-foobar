@@ -1,0 +1,17 @@
+tcp:
+  routers:
+    foobar-tls:
+      entryPoints:
+        - https
+      # rule: "HostSNI(`api.foobar.local`)"
+      rule: "HostSNI(`*`)"
+      service: foobar-service
+      tls:
+        passthrough: true
+
+  services:
+    foobar-service:
+      loadBalancer:
+        servers:
+          - address: "127.0.0.1:9443" # us
+          - address: "127.0.0.1:9444" # eu

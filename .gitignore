@@ -1,0 +1,10 @@
+deprecated/
+commands**.md
+**.txt
+
+k8s/certs/us/**
+k8s/certs/eu/**
+
+grafana-storage/**
+
+.DS_Store

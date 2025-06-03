@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: foobar-service
+  namespace: foobar-app
+  labels:
+    app: foobar-api
+spec:
+  type: ClusterIP
+  selector:
+    app: foobar-api
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP

@@ -40,4 +40,4 @@ else
 fi
 
 echo
-echo -e "${COLOR_GREEN} shutdown-all.sh complete. No services are running from this repo."
+echo -e "${COLOR_GREEN} shutdown-all.sh complete. No services are running from this repo. ${COLOR_RESET}"

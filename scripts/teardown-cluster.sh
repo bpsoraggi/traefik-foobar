@@ -40,4 +40,4 @@ if [[ "$REGION" == "eu" || "$REGION" == "all" ]]; then
     kind delete cluster --name "$EU_CLUSTER_NAME"
 fi
 
-echo -e "${COLOR_GREEN} teardown-cluster.sh ($REGION) complete."
+echo -e "${COLOR_GREEN} teardown-cluster.sh ($REGION) complete. ${COLOR_RESET}"

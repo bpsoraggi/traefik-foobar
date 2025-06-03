@@ -49,7 +49,7 @@ function gen_certs() {
             -subj "/CN=${region}.foobar.local/O=foobar" \
             -addext "subjectAltName = DNS:${region}.foobar.local"
     else
-        echo -e "${COLOR_YELLOW} $region cert already exists; skipping."
+        echo -e "${COLOR_YELLOW} $region cert already exists; skipping. ${COLOR_RESET}"
     fi
 }
 
@@ -116,4 +116,4 @@ if [[ "$REGION" == "eu" || "$REGION" == "all" ]]; then
     create_cluster_and_deploy "$EU_CLUSTER_NAME" "eu" "$EU_HOST_HTTPS_PORT"
 fi
 
-echo -e "${COLOR_GREEN} setup-cluster.sh ($REGION) complete."
+echo -e "${COLOR_GREEN} setup-cluster.sh ($REGION) complete. ${COLOR_RESET}"

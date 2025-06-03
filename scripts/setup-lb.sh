@@ -24,14 +24,14 @@ if ! docker ps --format="{{.Names}}" | grep -q "^prom-local$"; then
     docker-compose up -d prometheus grafana
     sleep 5
 else
-    echo -e "${COLOR_YELLOW} Prometheus & Grafana appear to already be running."
+    echo -e "${COLOR_YELLOW} Prometheus & Grafana appear to already be running. ${COLOR_RESET}"
 fi
 
 # Local Traefik LB setup
 
 PROXY_CFG="$(pwd)/local-proxy/traefik.yml"
 if [[ ! -f "$PROXY_CFG" ]]; then
-    echo -e "${COLOR_RED} ERROR: local-proxy/traefik.yml not found! Make sure you cloned the repo correctly."
+    echo -e "${COLOR_RED} ERROR: local-proxy/traefik.yml not found! Make sure you cloned the repo correctly. ${COLOR_RESET}"
     exit 1
 fi
 
@@ -42,7 +42,7 @@ if ! lsof -i TCP:9445 &>/dev/null; then
     echo "$TRAEFIK_PID" >>"$PID_FILE"
     sleep 2
 else
-    echo -e "${COLOR_YELLOW} local Traefik already appears to be listening on port 9445."
+    echo -e "${COLOR_YELLOW} local Traefik already appears to be listening on port 9445. ${COLOR_RESET}"
 fi
 
 # Port-forwarding
@@ -54,7 +54,7 @@ if ! lsof -i TCP:31883 &>/dev/null; then
     echo "$PF_US_PID" >>"$PID_FILE"
     sleep 1
 else
-    echo -e "${COLOR_YELLOW} Port 31883 is already forwarded or in use."
+    echo -e "${COLOR_YELLOW} Port 31883 is already forwarded or in use. ${COLOR_RESET}"
 fi
 
 if ! lsof -i TCP:31884 &>/dev/null; then
@@ -64,7 +64,7 @@ if ! lsof -i TCP:31884 &>/dev/null; then
     echo "$PF_EU_PID" >>"$PID_FILE"
     sleep 1
 else
-    echo -e "${COLOR_YELLOW} Port 31884 is already forwarded or in use."
+    echo -e "${COLOR_YELLOW} Port 31884 is already forwarded or in use. ${COLOR_RESET}"
 fi
 
 cat <<EOF

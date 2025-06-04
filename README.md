@@ -22,6 +22,8 @@ A demonstration of deploying the [foobar-api](https://github.com/containous/foob
 
 ## Quickstart
 
+\*_You may have to configure some extra routing_
+
 1. **Build Docker Image Locally**
 
    ```bash
@@ -95,6 +97,8 @@ A demonstration of deploying the [foobar-api](https://github.com/containous/foob
 - Build a **CI/CD pipeline** (GitOps) to lint, test, scan images, and deploy via Argo CD or Flux
 - Enable **persistent storage** for Prometheus & Grafana with encryption at rest and scheduled backups
 - Instrument `foobar-api` with **Prometheus client libraries** for business-level metrics
+- Refactor routing configuration for improved clarity, maintainability, and separation of concerns
+- Provide comprehensive documentation covering architecture, configuration, and operational procedures
 
 ---
 

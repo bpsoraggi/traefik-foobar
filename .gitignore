@@ -5,6 +5,8 @@ commands**.md
 k8s/certs/us/**
 k8s/certs/eu/**
 
+**.dat
+
 grafana-storage/**
 
 .DS_Store

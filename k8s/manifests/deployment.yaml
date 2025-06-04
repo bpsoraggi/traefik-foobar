@@ -38,6 +38,9 @@ spec:
             - name: cert-volume
               mountPath: /cert
               readOnly: true
+          env:
+            - name: WHOAMI_NAME
+              value: "foobar-service"
           readinessProbe:
             httpGet:
               path: /health
